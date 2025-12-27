@@ -26,9 +26,24 @@ class Video:
         return self 
      
      def update(self):
-        
+      # for loop that will keep looping until the thread is stopped. 
+      # Loop grabs the frame from the active stream.
+        for f in self.streamn: 
+           self.frame = f.array
+           self.rawCapture.truncate(0)
+        if self.stopped:
+               self.stream.close()
+               self.rawCapture.close()
+               self.camera.close()
+               return
+        (self.grabbed, self.frame) = self.stream.read()
 
-
+# Method to return the most recent frame
+def read(self):
+         return self.frame 
+# Method to stop the thread and camera 
+def stop(self):
+         self.stopped = True
 
     
 
