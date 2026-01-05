@@ -1,5 +1,8 @@
-<p align = "center"> 
- <h1> Raspberry Pi Card Counter </h1> 
+<div align="center">
+ 
+ <img src="blackjack.png" alt="project logo" width="150" style="border-radius: 15px;">
+ 
+# Raspberry Pi Card Counter
   <h3> Built by Tayler and Albert</h3>
 </p>
 <h2>Description</h2>
