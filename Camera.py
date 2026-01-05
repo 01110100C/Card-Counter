@@ -1,53 +1,50 @@
-from threading import thread 
+## Camera Video Stream 
+## Description: This file handles the camera video stream functionality. 
+
+from threading import Thread 
 import cv2
 
-class Video:
-    """Camera object"""
-    def __init__(self, resolution=(640,480),framerate=30,src=0):
+class Video: 
+    def __init__(self, resolution=(640,480), framerate=30, src=0): 
+          
+    # import pi camera packages
+     from picamera.array import PiRGBArray
+     from picamera import PiCamera
 
-        # Import packages from picamera library
-        from picamera.array import PiRGBArray
-        from picamera import PiCamera
+     self.camera = PiCamera()
+     self.camera.resolution = resolution
+     self.camera.framerate = framerate
+     self.rawCapture = PiRGBArray(self.camera, size=self.resolution)
+     self.stream = self.camera.capture_continuous(self.rawCapture, format="bgr", use_video_port = True)
 
-        # Initialize the PiCamera and the camera image stream
-        self.camera = PiCamera()
-        self.camera.resolution = resolution
-        self.camera.framerate = framerate
-        self.rawCapture = PiRGBArray(self.camera,size=resolution)
-        self.stream = self.camera.capture_continuous(
-        self.rawCapture, format = "bgr", use_video_port = True)
+     self.frame =[]
 
-        # Initialize variable to store the camera frame
-        self.frame = []
+     self.stopped = False
 
-
-	    # Create a variable to control when the camera is stopped
-        self.stopped = False
-
-    def start(self):
-	# Start the thread to read frames from the video stream
+     def start(self):
         Thread(target=self.update,args=()).start()
-        return self
-
-    def update(self):
-         # Keep looping indefinitely until the thread is stopped
-        for f in self.stream:
-        # Grab the frame from the stream and clear the stream
-        # in preparation for the next frame
-            self.frame = f.array
-            self.rawCapture.truncate(0)
-
+        return self 
+     
+     def update(self):
+      # for loop that will keep looping until the thread is stopped. 
+      # Loop grabs the frame from the active stream.
+        for f in self.streamn: 
+           self.frame = f.array
+           self.rawCapture.truncate(0)
         if self.stopped:
-        # Close camera resources
-            self.stream.close()
-            self.rawCapture.close()
-            self.camera.close()
+               self.stream.close()
+               self.rawCapture.close()
+               self.camera.close()
+               return
+        (self.grabbed, self.frame) = self.stream.read()
 
+# Method to return the most recent frame
+def read(self):
+         return self.frame 
+# Method to stop the thread and camera 
+def stop(self):
+         self.stopped = True
 
-    def read(self):
-		# Return the most recent frame
-        return self.frame
+    
 
-    def stop(self):
-		# Indicate that the camera and thread should be stopped
-        self.stopped = True
+>>>>>>> afb434fa11080e2bac98434129ca235209be2c0a
