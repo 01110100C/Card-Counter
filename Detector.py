@@ -10,10 +10,6 @@ FRAME_RATE = 30
 Camera = Camera.Video(resolution=(IM_WIDTH,IM_HEIGHT), framerate=FRAME_RATE).start()
 time.sleep(2)
 
-
-
-
-
 ## create a loop that obtains frames from the camera video stream
 
 ## create a function to take the isolated card value and add it to a running count 
