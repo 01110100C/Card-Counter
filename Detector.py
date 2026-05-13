@@ -11,7 +11,23 @@ for filename in os.listdir('card_templates/'):
      img = cv2.imread(f'card_templates/{filename}', 0)
      templates[name] = img
 
+def identify_card(card_region):
+    gray = cv2.cvtColor(card_region, cv2.COLOR_BGR2GRAY)
+    best_match = None
+    best_score = 0
 
+    for name, template in templates.items():
+         resized = cv2.resize(template, (gray.shape[1], gray.shape[0]))
+         result = cv2.matchTemplate(gray, resized, cv2.TM_CCOEFF_NORMED)
+         score = result.max()
+
+         if score > best_score:
+              best_score = score
+              best_match = name
+        
+         if best_score > 0.7: 
+            return best_match
+         
 
 
 
