@@ -1,20 +1,21 @@
-import numpy as np 
-import time 
-import Camera 
+import cv2
+import numpy as np
+import os 
 
-## Initialize camera settings 
-IM_WIDTH = 1280
-IM_HEIGHT = 720
-FRAME_RATE = 30
-## Add sleep to allow camera to warm up 
-Camera = Camera.Video(resolution=(IM_WIDTH,IM_HEIGHT), framerate=FRAME_RATE).start()
-time.sleep(2)
+# insert in card templates 
+# name them accordingly to card ex: 2_of_hearts
+templates = {}
 
-## create a loop that obtains frames from the camera video stream
+for filename in os.listdir('card_templates/'):
+     name = filename.replace('.jpg', '')
+     img = cv2.imread(f'card_templates/{filename}', 0)
+     templates[name] = img
 
-## create a function to take the isolated card value and add it to a running count 
-## accordingly. 
 
+
+
+
+# loop to keep track of running count
 if(card == 2 or card == 3 or card == 4 or card == 5 or card == 6):
     count += 1
 elif(card == 7 or card == 8 or card == 9):
