@@ -1,11 +1,17 @@
 body 
 {
-  background-color: black; 
+  background-color: darkgrey; 
 }
 
 h1
 {
-  color: white; 
+  color: black; 
+  text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+h3 {
+  color: black; 
   text-align: center;
     font-family: Arial, sans-serif;
 }
